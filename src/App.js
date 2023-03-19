@@ -35,15 +35,30 @@ function App() {
     return newDice
   }
 
+  // click button to start a new game when die is held create new die. 
+  // also setTenzies to false
+  // function newGame() {
+  //   setDice(oldDice => oldDice.map(die => {
+  //     return die.isHeld && generateNewDie()
+  //   }))
+  //   setTenzies(false)
+  // }
+
   // Clicking the button should generate a new array of numbers
   // and set the `dice` state to that new array (thus re-rendering
   // the array to the page)
+
   function rollDice() {
-    setDice(oldDice => oldDice.map(die => {
-      return die.isHeld ?
-        die :
-        generateNewDie()
-    }))
+    if (!tenzies) {
+      setDice(oldDice => oldDice.map(die => {
+        return die.isHeld ?
+          die :
+          generateNewDie()
+      }))
+    } else {
+      setTenzies(false)
+      setDice(allNewDice())
+    }
   }
 
   // Flip the `isHeld` property on the object in the array
@@ -68,8 +83,9 @@ function App() {
   )
   return (
     <div className="border">
+      {tenzies && <Confetti />}
       <main>
-        {tenzies && <Confetti />}
+
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className="dice-container">
