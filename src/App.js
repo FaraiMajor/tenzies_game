@@ -8,6 +8,10 @@ function App() {
 
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false)
+  const [rolls, setRolls] = useState(0)
+  const [bestRolls, setBestRolls] = useState(Number(localStorage.getItem('bestTime')) || Infinity);
+  const [timer, setTimer] = useState(0);
+  const [bestTime, setBestTime] = useState(Number(localStorage.getItem('bestTime')) || Infinity);
 
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld); // Check if all dice are held
@@ -15,9 +19,33 @@ function App() {
     if (allHeld && allEqual) {
       setTenzies(true)
       console.log("You win!");
-      // Do something to handle the win condition (e.g. display a message or trigger an animation)
+      // Do something to handle the win condition 
+      // (e.g. display a message or trigger an animation)
     }
   }, [dice]);
+
+  // timer to count time elapsed to play game
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
+  /* The useEffect hook is used to update the bestTime state variable and 
+  store the new best time in local storage whenever the game is won and 
+  the timer value is less than the current best time. The isWinner and timer 
+  values are added as dependencies to this hook to ensure that it only runs when 
+  the game is won and the timer value changes. */
+
+  useEffect(() => {
+    if (tenzies && timer < bestTime) {
+      localStorage.setItem('bestTime', timer);
+      setBestTime(timer);
+    }
+  }, [tenzies, timer]);
+
+  // useEffect
   // helper function to avoid code repetiton
   function generateNewDie() {
     return {
@@ -54,10 +82,14 @@ function App() {
         return die.isHeld ?
           die :
           generateNewDie()
-      }))
+      }));
+      // update roll counter when we roll dice
+      updateRollCounter();
     } else {
       setTenzies(false)
       setDice(allNewDice())
+      setTimer(0)
+      setRolls(0)
     }
   }
 
@@ -76,6 +108,12 @@ function App() {
 
     ))
   }
+  // Track number of rolls
+
+  // Increase rolls counter updating previous state
+  function updateRollCounter() {
+    return setRolls((oldRolls) => oldRolls + 1);
+  }
   // Map over the state numbers array to generate the array
   // of Die elements and render those in the App component
   const diceElements = dice.map(die =>
@@ -85,8 +123,12 @@ function App() {
     <div className="border">
       <main>
         {tenzies && <Confetti width="450px" height="450px" />}
-        <h1 className="title">Tenzies</h1>
+        <h1 className="title">TENZIES</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+        <div className="stats-container">
+          <p className="roll-count">Rolls: {rolls}</p>
+          <p className="timer">Timer: {timer}s</p>
+        </div>
         <div className="dice-container">
           {diceElements}
         </div>
@@ -94,7 +136,13 @@ function App() {
           <button className="button-86" onClick={rollDice}>
             {tenzies ? "New Game" : "Roll"}
           </button>
+
         </div>
+        <div className="stats-container">
+          <div>Best Time: {bestTime === Infinity ? 'N/A' : `${bestTime}s`}</div>
+          <p>Best Roll: </p>
+        </div>
+
       </main>
     </div>
   );
