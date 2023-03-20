@@ -1,15 +1,21 @@
 {
   "files": {
     "main.css": "/tenzies_game/static/css/main.10bd9189.css",
-    "main.js": "/tenzies_game/static/js/main.427f9082.js",
+    "main.js": "/tenzies_game/static/js/main.bc6c68a2.js",
     "static/js/787.030a1986.chunk.js": "/tenzies_game/static/js/787.030a1986.chunk.js",
+    "static/media/dice-red6.png": "/tenzies_game/static/media/dice-red6.89fe5f53c0b6ec072ba7.png",
+    "static/media/dice-red5.png": "/tenzies_game/static/media/dice-red5.c446764499a4a30dfe8b.png",
+    "static/media/dice-red3.png": "/tenzies_game/static/media/dice-red3.d5810f55940b1f991d70.png",
+    "static/media/dice-red4.png": "/tenzies_game/static/media/dice-red4.2a8a8116cfa8b6cc0d23.png",
+    "static/media/dice-red2.png": "/tenzies_game/static/media/dice-red2.c3a4c8c00cb9df1e9f98.png",
+    "static/media/dice-red1.png": "/tenzies_game/static/media/dice-red1.4214d536ff3424bf77f7.png",
     "index.html": "/tenzies_game/index.html",
     "main.10bd9189.css.map": "/tenzies_game/static/css/main.10bd9189.css.map",
-    "main.427f9082.js.map": "/tenzies_game/static/js/main.427f9082.js.map",
+    "main.bc6c68a2.js.map": "/tenzies_game/static/js/main.bc6c68a2.js.map",
     "787.030a1986.chunk.js.map": "/tenzies_game/static/js/787.030a1986.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.10bd9189.css",
-    "static/js/main.427f9082.js"
+    "static/js/main.bc6c68a2.js"
   ]
 }
