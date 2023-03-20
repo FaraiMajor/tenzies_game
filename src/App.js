@@ -24,7 +24,7 @@ function App() {
     }
   }, [dice]);
 
-  // timer to count time elapsed to play game
+  // timer to count time elapsed to play game every second
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTimer((prevTimer) => prevTimer + 1);
