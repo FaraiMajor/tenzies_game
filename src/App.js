@@ -9,7 +9,7 @@ function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false)
   const [rolls, setRolls] = useState(0)
-  const [bestRolls, setBestRolls] = useState(Number(localStorage.getItem('bestTime')) || Infinity);
+  const [bestRolls, setBestRolls] = useState(Number(localStorage.getItem('bestRolls')) || Infinity);
   const [timer, setTimer] = useState(0);
   const [bestTime, setBestTime] = useState(Number(localStorage.getItem('bestTime')) || Infinity);
 
@@ -34,16 +34,23 @@ function App() {
 
   /* The useEffect hook is used to update the bestTime state variable and 
   store the new best time in local storage whenever the game is won and 
-  the timer value is less than the current best time. The isWinner and timer 
+  the timer value is less than the current best time. The Tenzies and timer 
   values are added as dependencies to this hook to ensure that it only runs when 
   the game is won and the timer value changes. */
-
   useEffect(() => {
     if (tenzies && timer < bestTime) {
       localStorage.setItem('bestTime', timer);
       setBestTime(timer);
     }
   }, [tenzies, timer]);
+
+  // this use effect tracks rolls and upodate localStorage same as our timer useEffect
+  useEffect(() => {
+    if (tenzies && rolls < bestRolls) {
+      localStorage.setItem('bestRolls', rolls)
+      setBestRolls(rolls)
+    }
+  }, [tenzies, rolls])
 
   // useEffect
   // helper function to avoid code repetiton
@@ -66,7 +73,7 @@ function App() {
   // click button to start a new game when die is held create new die. 
   // also setTenzies to false
   // function newGame() {
-  //   setDice(oldDice => oldDice.map(die => {
+  //   setDice(prevDice => prevDice.map(die => {
   //     return die.isHeld && generateNewDie()
   //   }))
   //   setTenzies(false)
@@ -76,9 +83,15 @@ function App() {
   // and set the `dice` state to that new array (thus re-rendering
   // the array to the page)
 
+
+  // Increase rolls counter updating previous state
+  function updateRollCounter() {
+    return setRolls((prevRolls) => prevRolls + 1);
+  }
+
   function rollDice() {
     if (!tenzies) {
-      setDice(oldDice => oldDice.map(die => {
+      setDice(prevDice => prevDice.map(die => {
         return die.isHeld ?
           die :
           generateNewDie()
@@ -108,12 +121,6 @@ function App() {
 
     ))
   }
-  // Track number of rolls
-
-  // Increase rolls counter updating previous state
-  function updateRollCounter() {
-    return setRolls((oldRolls) => oldRolls + 1);
-  }
   // Map over the state numbers array to generate the array
   // of Die elements and render those in the App component
   const diceElements = dice.map(die =>
@@ -126,8 +133,8 @@ function App() {
         <h1 className="title">TENZIES</h1>
         <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
         <div className="stats-container">
-          <p className="roll-count">Rolls: {rolls}</p>
-          <p className="timer">Timer: {timer}s</p>
+          <p className="roll-count">Rolls:{rolls}</p>
+          <p className="timer">Timer:{timer}s</p>
         </div>
         <div className="dice-container">
           {diceElements}
@@ -138,12 +145,13 @@ function App() {
           </button>
 
         </div>
-        <div className="stats-container">
-          <div>Best Time: {bestTime === Infinity ? 'N/A' : `${bestTime}s`}</div>
-          <p>Best Roll: </p>
-        </div>
 
       </main>
+      <div className="best-stats-container">
+        {/* default our best time to N/A when we have nothing in local storage */}
+        <p className="best">Best Time: {bestTime === Infinity ? 'N/A' : `${bestTime}s`}</p>
+        <p className="best">Best Roll: {bestRolls === Infinity ? 'N/A' : `${bestRolls}`} </p>
+      </div>
     </div>
   );
 }

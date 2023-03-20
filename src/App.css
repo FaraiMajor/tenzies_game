@@ -13,16 +13,30 @@ body {
     display: flex;
     background-color: black;
     width: 500px;
-    height: 600px;
-    margin: 100px 460px;
-    left: 38%;
+    height: 650px;
+    margin: 60px 475px;
+    border-radius: 10px;
+}
+
+.best-stats-container {
+    display: flex;
+    color: whitesmoke;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.best {
+    background-color: #5035FF;
+    padding: 10px 15px;
+    margin: 570px 1px 38px 65px;
+    border: none;
     border-radius: 10px;
 }
 
 main {
     background-color: #F5F5F5;
     height: 500px;
-    max-width: 800px;
+    max-width: 400px;
     border-radius: 10px;
     padding: 20px 40px;
     display: flex;
@@ -30,9 +44,18 @@ main {
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 25%;
-    left: 38%;
+    top: 20%;
+    left: 40%;
     margin: -25px 0 0 -25px;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: center;
+}
+
+.timer {
+    margin-left: 25px
 }
 
 .title {
@@ -72,12 +95,6 @@ main {
 
 .btn {
     margin-top: 70px;
-}
-
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    width: 200px;
 }
 
 
