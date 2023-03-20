@@ -3,7 +3,7 @@
 Create a Tenzies Game using React.JS framework and its functionalities
 ### :camera: Screenshot
 
-![screenshot](/src/images/tenzies.gif)
+![screenshot](./public/images/tenzies.gif)
 
 ## :hammer: Technologies & Tool
 
@@ -26,7 +26,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [SimplerNerd](https://simplernerd.com/js-get-substring-before-char/) - How to Get the Substring Before a Character in JavaScript
 - [Confetti @Github](https://github.com/alampros/react-confetti)
 - [Nanoid @Github](https://github.com/ai/nanoid#react)
+- <a href="https://www.flaticon.com/free-icons/luck" title="luck icons">Luck icons created by Freepik - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/dice" title="dice icons">Dice icons created by IconsNova - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/dice" title="dice icons">Dice icons created by Google - Flaticon</a>
+
+
 
 ## :bust_in_silhouette: Author
 
 - Website - [Farai Major](https://faraimajor.com/)
+
